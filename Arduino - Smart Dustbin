@@ -1,0 +1,30 @@
+//Ultrasonic Sensor -  trig #10 : echo #11
+//servoMotor - #3
+
+#include <Servo.h>
+int pingPin = 10; // Trigger Pin of Ultrasonic Sensor
+int echoPin = 11; // Echo Pin of Ultrasonic Sensor
+int servoPin = 3;
+Servo Servo1;
+void setup() {Serial.begin(9600);
+Servo1.attach(servoPin);
+pinMode(pingPin, OUTPUT);
+  long duration, cm;
+pinMode(echoPin, INPUT);    }
+void loop() {
+     digitalWrite(pingPin, LOW);
+   delayMicroseconds(2);
+   digitalWrite(pingPin, HIGH);
+   delayMicroseconds(10);
+   digitalWrite(pingPin, LOW);
+      duration = pulseIn(echoPin, HIGH);
+   cm = microsecondsToCentimeters(duration);
+   Serial.println(cm);
+    delay(100);
+if(cm>10){
+Servo1.write(0); 
+   delay(1000);
+Servo1.write(90);}
+}
+long microsecondsToCentimeters(long microseconds) {
+   return microseconds / 29 / 2;}
