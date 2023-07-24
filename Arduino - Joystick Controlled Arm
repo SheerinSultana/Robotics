@@ -1,0 +1,24 @@
+//Joystick -  X #14 : Y #15
+//Servo Motor - #3 #5
+
+#include <Servo.h>
+Servo servo1;
+Servo servo2;
+int joyX = 14;
+int joyY = 15;
+int joyVal;
+void setup ()
+{  //attaches our servos on pins PWM 3-5
+  servo1.attach(3);
+  servo2.attach(5);}
+
+void loop ()
+{  //read the value of joystick (betwen 0-1023)
+  joyVal = analogRead(joyX);
+  joyVal = map(joyVal, 0, 1023, 0, 180); //servo value betven 0-180
+  servo1.write(joyVal); //set the servo position acording to the joystick value
+
+  joyVal = analogRead(joyY);
+  joyVal = map (joyVal, 0, 1023, 0, 180);
+  servo2.write(joyVal);
+  delay(15);}
