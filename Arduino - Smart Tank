@@ -1,0 +1,55 @@
+#include <Servo.h> 
+int state =0;
+int doorPin = 3; 
+int tankPin = 4; 
+Servo door; 
+Servo tank;
+int dl=13;
+int hl=12;
+int rl=11;int rs=10;
+void setup() { 
+  Serial.begin(9600);
+pinMode(rl, OUTPUT);
+pinMode(dl, OUTPUT);
+pinMode(hl, OUTPUT);
+ tank.attach(tankPin); 
+ pinMode(rs, INPUT);
+door.attach(doorPin); 
+}
+ 
+ 
+void loop() {
+  if (Serial.available()>0){
+ 
+    state=Serial.read();
+    Serial.println(state);
+    if (state==99){
+    door.write(0);
+    }
+   if (state==100){
+    door.write(90);
+    }
+    if (state==112){
+    digitalWrite (rl,HIGH);
+    }
+       if (state==111){
+    digitalWrite (rl,LOW);
+    }
+ 
+    if (state==110){
+    digitalWrite (hl,HIGH);
+    }
+       if (state==109){
+    digitalWrite (hl,LOW);
+    }
+ 
+    if (state==107){
+    digitalWrite (dl,HIGH);
+    }
+       if (state==108){
+    digitalWrite (dl,LOW);
+    }
+   if(digitalRead(rs) == LOW){
+tank.write( 90);}
+ else{tank.write(0);}
+  }  }
