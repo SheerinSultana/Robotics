@@ -1,0 +1,55 @@
+int state = 0;
+void setup() {
+pinMode(5,OUTPUT);
+pinMode(6,OUTPUT);
+pinMode(7,OUTPUT);
+pinMode(8,OUTPUT);
+  Serial.begin(9600); // Default communication rate of the Bluetooth module
+}
+
+void loop() 
+{
+  if(Serial.available() > 0)
+{ 
+    state = Serial.read(); 
+Serial.println(state);
+ 
+ if (state == 49 ) { digitalWrite(7, 1);
+ digitalWrite(8, 0);
+ digitalWrite(5, 0);
+ digitalWrite(6, 1);
+
+Serial.println("Forward");
+ }
+ 
+ else if (state == 50) {
+ digitalWrite(6, LOW);
+ digitalWrite(5, HIGH);
+ digitalWrite(7, LOW);
+ digitalWrite(8, HIGH);
+ Serial.println("Backward"); } 
+ 
+if (state == 51) {
+ digitalWrite(5, LOW);
+ digitalWrite(6, HIGH);
+ digitalWrite(7, LOW);
+ digitalWrite(8, HIGH);
+  
+  Serial.println("Left");
+ }
+ else if (state == 52) {
+ digitalWrite(5, HIGH);
+ digitalWrite(6, LOW);
+ digitalWrite(7, HIGH);
+ digitalWrite(8, LOW);
+  Serial.println("Right");
+ }
+ else if (state == 48){
+   digitalWrite(5, LOW);
+ digitalWrite(6, LOW);
+ digitalWrite(7, LOW);
+ digitalWrite(8, LOW);
+  Serial.println("STOP");
+  }
+ } 
+}
