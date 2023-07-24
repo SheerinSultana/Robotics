@@ -1,5 +1,5 @@
-LDR -  #10
-LED -  #3
+//LDR -  #10
+//LED -  #3
 
 int LDRPin = 10;
 int led = 3;
