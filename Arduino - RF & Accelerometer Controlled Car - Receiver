@@ -1,0 +1,63 @@
+#include <VirtualWire.h>
+int la=5;
+int lb=6;
+int ra=7;
+int rb=8;
+void setup()
+{Serial.begin(9600);
+
+vw_set_ptt_inverted(true); // Required for DR3100
+vw_set_rx_pin(12);
+vw_setup(4000); // Bits per sec
+
+vw_rx_start(); // Start the receiver PLL running
+pinMode(la,OUTPUT);
+pinMode(lb,OUTPUT);
+pinMode(ra,OUTPUT);
+pinMode(rb,OUTPUT);
+}
+void loop()
+{
+uint8_t buf[VW_MAX_MESSAGE_LEN];
+uint8_t buflen = VW_MAX_MESSAGE_LEN;
+
+if (vw_get_message(buf, &buflen)) // Non-blocking
+{
+if(buf[0]=='f'){
+  Serial.println("forward");
+digitalWrite(lb,HIGH);
+digitalWrite(la,LOW);
+digitalWrite(rb,HIGH);
+digitalWrite(ra,LOW);
+delay(700);
+}
+if(buf[0]=='b'){
+  Serial.println("backward");
+ digitalWrite(la,HIGH);
+digitalWrite(lb,LOW);
+digitalWrite(ra,HIGH);
+digitalWrite(rb,LOW);
+delay(700);
+}
+if(buf[0]=='r'){
+  Serial.println("right");
+  digitalWrite(lb,HIGH);
+digitalWrite(la,LOW);
+digitalWrite(ra,HIGH);
+digitalWrite(rb,LOW);
+delay(700);
+}
+
+if(buf[0]=='l'){
+  Serial.println("left");
+  digitalWrite(rb,HIGH);
+digitalWrite(ra,LOW);
+digitalWrite(la,HIGH);
+digitalWrite(lb,LOW);
+  delay(700);
+}
+digitalWrite(rb,HIGH);
+digitalWrite(ra,HIGH);
+digitalWrite(la,HIGH);
+digitalWrite(lb,HIGH);
+}}
