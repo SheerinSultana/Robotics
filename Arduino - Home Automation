@@ -1,0 +1,43 @@
+include <Servo.h> 
+int state =0;
+int servoPin = 3; 
+Servo Servo1; 
+void setup() { 
+  Serial.begin(9600);
+pinMode(13, OUTPUT);
+pinMode(11, OUTPUT);
+pinMode(12, OUTPUT);
+Servo1.attach(servoPin); 
+}
+
+void loop() {
+  if (Serial.available()>0){
+    state=Serial.read();
+    Serial.println(state);
+    if (st#ate==99){
+    Servo1.write(0);
+    }
+   if (state==100){
+    Servo1.write(90);
+    }
+    if (state==112){
+    digitalWrite (13,HIGH);
+    }
+       if (state==111){
+    digitalWrite (13,LOW);
+    }
+
+    if (state==110){
+    digitalWrite (12,HIGH);
+    }
+       if (state==109){
+    digitalWrite (12,LOW);
+    }
+
+    if (state==107){
+    digitalWrite (11,HIGH);
+    }
+       if (state==108){
+    digitalWrite (11,LOW);
+    }
+  }  }
