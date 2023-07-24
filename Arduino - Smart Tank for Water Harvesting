@@ -1,0 +1,14 @@
+//Rain Sensor - Digital pin #12
+//Servo Motor - #3
+
+#include <Servo.h>
+Servo servo1;
+void setup() {
+pinMode(12, INPUT);
+servo1.attach(3);
+pinMode(3, OUTPUT);}
+ 
+void loop() {
+if(digitalRead(12) == LOW){
+servo1.write( 90);}
+ else{servo1.write(0);}}
